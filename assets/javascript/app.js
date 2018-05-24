@@ -66,9 +66,13 @@ $(document).ready(function () {
     dataMapArray.push(dataMap);
 
     let numberOfAnswered = [];
+    let timerObject;
 
     function setUpGame() {
+        numberOfAnswered = [];
         $("#qAndAId").empty();
+        //clears the timer from previous game;
+        clearInterval(timerObject);
         for (let i = 0; i < dataMapArray.length; i++) {
             dataMapArray[i].set("guess", "");
             let newDiv = $("<div>");
@@ -143,6 +147,7 @@ $(document).ready(function () {
         for(let i = 0; i < numberOfAnswered.length; i++) {
             if(numberOfAnswered[i].attr("index") === form.attr("index")) {
                 numberOfAnswered[i] = form;
+                isInList = true;
             }
         }
         if(isInList === false) {
@@ -163,7 +168,8 @@ $(document).ready(function () {
         $("#startDivId").empty();
         setUpGame();
         $("#timerId").removeClass("timerOff").addClass("timerOn");
-        countDown("timerId", 30000, "Times up!", shutDownGame);
+        timerObject = countDown("timerId", 30000, "Times up!", shutDownGame);
+        console.log(timerObject);
     });
 
     $(document).on("click", ".answerButton", function() {

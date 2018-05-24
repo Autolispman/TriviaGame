@@ -30,4 +30,5 @@ function countDown(htmlElementId, timeToElapseInMilSec, expiredMessage, callback
             callback();
         }
     }, 1000);
+    return x;
 }
